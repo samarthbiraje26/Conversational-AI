@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const dotenv = require('dotenv');
+const path = require('path');
 const { GoogleGenerativeAI } = require('@google/generative-ai');
 
 dotenv.config();
@@ -37,7 +38,7 @@ async function generateResponse(prompt) {
   }
 }
 
-// Routes
+// API Routes
 app.post('/api/chat', async (req, res) => {
   try {
     const { message } = req.body;
@@ -74,6 +75,17 @@ app.post('/api/chat', async (req, res) => {
     });
   }
 });
+
+// Serve static files in production
+if (process.env.NODE_ENV === 'production') {
+  // Serve static files from the React build directory
+  app.use(express.static(path.join(__dirname, '../client/build')));
+
+  // Handle React routing, return all requests to React app
+  app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
+  });
+}
 
 // Error handling middleware
 app.use((err, req, res, next) => {
