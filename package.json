@@ -1,8 +1,10 @@
 {
-  "name": "conversational-ai",
+  "name": "finn-ai",
   "version": "1.0.0",
-  "description": "A conversational AI web app using Gemini API",
+  "description": "Finn AI - A conversational AI web app using Gemini API",
   "main": "server/server.js",
+  "homepage": "./"
+  ,
   "scripts": {
     "start": "node server/server.js",
     "server": "nodemon server/server.js",
@@ -19,4 +21,4 @@
     "nodemon": "^3.0.2",
     "concurrently": "^8.2.2"
   }
-} 
+}
